@@ -1,5 +1,5 @@
 # Ano im babag ohon Alyssa?
-By: Jeamzy, Nizah, Wayne (asya la tak kilala sorry)
+By: Jeamzy, Nizah, Alyssa, Wayne (asya la tak kilala sorry)
 
 ## About
 Developed by Stem-D for Research purposes

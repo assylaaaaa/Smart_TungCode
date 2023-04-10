@@ -5,13 +5,13 @@ const int trigPin     = 9;
 const int echoPin     = 10;
 int echoValue; //holds the duration value for the waves to return
 int distanceCm; //holds distance in centimeters
-int distanceThreshold = 14; // 14 centimeter distance
+int distanceThreshold = 15; // 15 centimeter distance
 
 //For water sensor
-//might need calibration for the threshold of water(shit)
+//might need calibration for the threshold of water(270)
 const int waterSensor = A0;
 int waterValue; // the higher the more the water
-const int waterThreshold = 270; // trash threshold value(shit tuhaya nalain niyo(joke))
+const int waterThreshold = 270; // trash threshold value(example(280))
 
 //For button
 const int buttonInput = 7;
@@ -75,14 +75,14 @@ void setup() {
 }
 
 void loop() {
-  delay(300); //delay 0.3 second before doing anything to prevent overdoing things(ambut bawo)
+  delay(300); //delay 0.3 second before doing anything to prevent false alarms or overdoing things
 
   //check if button pressed
   if(digitalRead(buttonInput)==HIGH){
     //if pressed
     sound_SOS();
   }else{
-    // if button not pressed we check for other reason to buzz the buzzer(shit)
+    // if button not pressed we check for other reason to buzz the buzzer(either water or an obstacle is detected)
 
     /////////////////////////////////////////////////////////////////////////////////////
     //ultrasonic sensor first
@@ -96,7 +96,7 @@ void loop() {
     echoValue = pulseIn(echoPin,HIGH);
     distanceCm = echoValue * 0.034 / 2; // convert to centimeter
 
-    //if object detected <= 14 centimeter(shit ambut ano max distance)
+    //if object detected <= 15 centimeter(50 centimeter maximum distance)
     if(distanceCm <= distanceThreshold){
       digitalWrite(buzzerPin,HIGH);
       delay(500);

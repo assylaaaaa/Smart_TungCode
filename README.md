@@ -2,5 +2,6 @@
 By: Jeamzy, Nizah, Wayne (asya la tak kilala sorry)
 
 ## About
-Basta smart in nga tungkod
-Goodluck haiyo
+Developed by Stem-D for Research purposes
+#### Basta smart in nga tungkod
+#### Goodluck haiyo

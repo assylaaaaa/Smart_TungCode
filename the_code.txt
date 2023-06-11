@@ -1,107 +1,106 @@
-
-
 //Define variables for Ultrasonic sensors
-const int trigPin     = 9;
-const int echoPin     = 10;
+
+const int ultraSonicPin = 9;
+
 int echoValue; //holds the duration value for the waves to return
 int distanceCm; //holds distance in centimeters
-int distanceThreshold = 14; // 14 centimeter distance
+int distanceThreshold = 60; // 14 centimeter distance
 
 //For water sensor
-//might need calibration for the threshold of water(shit)
-const int waterSensor = A0;
+const int waterSensor = A1;
 int waterValue; // the higher the more the water
-const int waterThreshold = 270; // trash threshold value(shit tuhaya nalain niyo(joke))
+const int waterThreshold = 330; 
 
 //For button
-const int buttonInput = 7;
+const int buttonInput = 12;
 
 //For buzzer
-const int buzzerPin   = 2;
+const int buzzerPin   = 5;
 
 
 void sound_SOS(){
   //morse coded sound
   // S -> . . .
   digitalWrite(buzzerPin,HIGH);
-  delay(100);
+  delay(50);
   digitalWrite(buzzerPin,LOW);
-  delay(100);
+  delay(50);
   digitalWrite(buzzerPin,HIGH);
-  delay(100);
+  delay(50);
   digitalWrite(buzzerPin,LOW);
-  delay(100);
+  delay(50);
   digitalWrite(buzzerPin,HIGH);
-  delay(100);
+  delay(50);
   digitalWrite(buzzerPin,LOW);
-  delay(100);
+  delay(50);
 
   // O -> _ _ _
   digitalWrite(buzzerPin,HIGH);
-  delay(500);
+  delay(100);
   digitalWrite(buzzerPin,LOW);
-  delay(500);
+  delay(100);
   digitalWrite(buzzerPin,HIGH);
-  delay(500);
+  delay(100);
   digitalWrite(buzzerPin,LOW);
-  delay(500);
+  delay(100);
   digitalWrite(buzzerPin,HIGH);
-  delay(500);
+  delay(100);
   digitalWrite(buzzerPin,LOW);
-  delay(500);
+  delay(100);
 
   // S -> . . .
   digitalWrite(buzzerPin,HIGH);
-  delay(100);
+  delay(50);
   digitalWrite(buzzerPin,LOW);
-  delay(100);
+  delay(50);
   digitalWrite(buzzerPin,HIGH);
-  delay(100);
+  delay(50);
   digitalWrite(buzzerPin,LOW);
-  delay(100);
+  delay(50);
   digitalWrite(buzzerPin,HIGH);
-  delay(100);
+  delay(50);
   digitalWrite(buzzerPin,LOW);
-  delay(100);
+  delay(50);
 }
 
 
 void setup() {
   // initialize the variables
-  pinMode(trigPin,OUTPUT);
-  pinMode(echoPin,INPUT);
   pinMode(buttonInput,INPUT);
   pinMode(buzzerPin,OUTPUT);
 }
 
 void loop() {
-  delay(300); //delay 0.3 second before doing anything to prevent overdoing things(ambut bawo)
+  delay(100); //delay 0.1 second before doing anything to prevent overdoing things
 
   //check if button pressed
   if(digitalRead(buttonInput)==HIGH){
     //if pressed
     sound_SOS();
   }else{
-    // if button not pressed we check for other reason to buzz the buzzer(shit)
+    // if button not pressed we check for other reason to buzz the buzzer
 
     /////////////////////////////////////////////////////////////////////////////////////
-    //ultrasonic sensor first
-    digitalWrite(trigPin,LOW);
+    //send waves
+    pinMode(ultraSonicPin,OUTPUT);
+    digitalWrite(ultraSonicPin,LOW);
     delayMicroseconds(2);
+    digitalWrite(ultraSonicPin,HIGH);
+    delayMicroseconds(2);
+    digitalWrite(ultraSonicPin,LOW);
+    
 
     //send waves to the nearest object
-    digitalWrite(trigPin,HIGH);
-    delayMicroseconds(10); // but for only 0.00001 seconds
-    digitalWrite(trigPin,LOW);
-    echoValue = pulseIn(echoPin,HIGH);
+    pinMode(ultraSonicPin,INPUT);
+    echoValue = pulseIn(ultraSonicPin,HIGH);
     distanceCm = echoValue * 0.034 / 2; // convert to centimeter
 
-    //if object detected <= 14 centimeter(shit ambut ano max distance)
+    //if object detected <= 14 centimeter
     if(distanceCm <= distanceThreshold){
       digitalWrite(buzzerPin,HIGH);
-      delay(500);
+      delay(300);
       digitalWrite(buzzerPin,LOW);
-      delay(200);
+      delay(300);
     }
     /////////////////////////////////////////////////////////////////////////////////////
 
@@ -111,15 +110,15 @@ void loop() {
     if(waterValue >= waterThreshold){
       //once
       digitalWrite(buzzerPin,HIGH);
-      delay(500);
+      delay(90);
       digitalWrite(buzzerPin,LOW);
-      delay(200);
+      delay(90);
       
       //twice
       digitalWrite(buzzerPin,HIGH);
-      delay(500);
+      delay(90);
       digitalWrite(buzzerPin,LOW);
-      delay(200);
+      delay(90);
     }
     
   }

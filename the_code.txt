@@ -4,7 +4,7 @@ const int ultraSonicPin = 9;
 
 int echoValue; //holds the duration value for the waves to return
 int distanceCm; //holds distance in centimeters
-int distanceThreshold = 60; // 14 centimeter distance
+int distanceThreshold = 60; // 60 centimeter distance
 
 //For water sensor
 const int waterSensor = A1;
@@ -95,7 +95,7 @@ void loop() {
     echoValue = pulseIn(ultraSonicPin,HIGH);
     distanceCm = echoValue * 0.034 / 2; // convert to centimeter
 
-    //if object detected <= 14 centimeter
+    //if object detected <= 60 centimeter
     if(distanceCm <= distanceThreshold){
       digitalWrite(buzzerPin,HIGH);
       delay(300);
